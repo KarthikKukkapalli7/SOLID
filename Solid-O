@@ -1,0 +1,60 @@
+SOLID 
+O - Open for extension but closed for modification
+
+class Marker{
+    String name;
+    Integer price;
+    String  color;
+    public Marker(String name,String color,Integer price){
+        this.name=name;
+        this.price=price;
+        this.color=color;
+    }
+}
+class Invoice{
+    Marker marker;
+    Integer quantity;
+    public Invoice(Marker marker,Integer quantity){      /** S - SIngle responsibility principle */
+        this.marker=marker;
+        this.quantity=quantity;
+                                                 }
+    public Integer totalFair(){
+        return this.marker.price*this.quantity;
+                                   
+    }
+}
+interface InvoiceDao{
+    public void save(Invoice invoice);
+}
+
+class SaveToDB implements InvoiceDao{
+    
+    @Override
+    public void save(Invoice invoice){
+Integer value = invoice.totalFair();
+System.out.println("the data stored to DB "+value);      /**   O - open for extension but closed  for modification */  
+    }
+}
+class SaveToFiles implements InvoiceDao{
+    @Override
+    public void save(Invoice invoice){
+        Integer value= invoice.totalFair();
+        System.out.println("the data stored to Files "+value);
+    }
+}
+/**
+ * SingleresponsibilityPattern
+ */
+public class SingleresponsibilityPattern {
+
+    public static void main(String[] args) {
+        Marker obj = new Marker("BallPen", "Blue", 9);
+        Invoice calculate= new Invoice(obj,100);
+        calculate.totalFair();
+        SaveToFiles files = new SaveToFiles();
+        files.save(calculate);
+        SaveToDB DB= new SaveToDB();
+        DB.save(calculate);
+
+    }
+}
