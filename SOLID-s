@@ -1,0 +1,34 @@
+SOLId
+S-single responsibility principle
+class Marker{
+    String name;
+    Integer price;
+    String  color;
+    public Marker(String name,String color,Integer price){
+        this.name=name;
+        this.price=price;
+        this.color=color;
+    }
+}
+class CalculateInvoice{
+    Marker marker;
+    Integer quantity;
+    public CalculateInvoice(Marker marker,Integer quantity){
+        this.marker=marker;
+        this.quantity=quantity;
+                                                 }
+    public void totalFair(){
+        System.out.println(this.marker.price*this.quantity);
+                                   
+    }}
+/**
+ * SingleresponsibilityPattern
+ */
+public class SingleresponsibilityPattern {
+
+    public static void main(String[] args) {
+        Marker obj = new Marker("BallPen", "Blue", 9);
+        CalculateInvoice calculate= new CalculateInvoice(obj,100);
+        calculate.totalFair();
+    }
+}
