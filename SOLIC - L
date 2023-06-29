@@ -1,0 +1,40 @@
+SOLID - L
+Liskov Substitution Principle
+interface Bike{
+    public void  turnOnEngine();
+    public void accelarate();
+}
+
+class MotorCycle implements Bike{ 
+    Boolean isOn;
+    Integer speed=0;
+    @Override
+    public void turnOnEngine() {
+        this.isOn=true;
+    }
+    @Override
+    public void accelarate(){
+        this.speed=this.speed+10;
+    } 
+}
+class ByCycle implements Bike{
+    Boolean isOn;
+    Integer speed=0;
+    @Override 
+    public void turnOnEngine(){
+        throw new AssertionError("There is no engine in ByCycle"); # this is breaking connection with parent class 
+    }
+    @Override
+    public void accelarate(){
+        this.speed=this.speed+3;
+    }
+}
+class SinglerespnsibilityPattern{
+    public static void main(String[] args) {
+        MotorCycle mc=new MotorCycle();
+        mc.turnOnEngine();
+        mc.accelarate();
+        ByCycle bc=new ByCycle();
+        bc.turnOnEngine();
+    }
+}
